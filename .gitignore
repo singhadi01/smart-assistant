@@ -1,0 +1,25 @@
+# === Python Cache Files ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Virtual Environment ===
+env/
+
+# === Django-specific Files ===
+*.sqlite3
+db.sqlite3
+/media/
+*.log
+
+# === Environment Variables ===
+.env
+
+# === VSCode Settings (Optional) ===
+.vscode/
+
+# === System Files ===
+.DS_Store
+Thumbs.db
+
