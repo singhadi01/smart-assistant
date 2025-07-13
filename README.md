@@ -82,11 +82,15 @@ source env/bin/activate  # For macOS/Linux
 ### 4. Run Django Server
 ```python manage.py runserver```
 
+---
+
 ## Screenshots
 <img width="1904" height="791" alt="image" src="https://github.com/user-attachments/assets/cece0392-4c8a-490a-9cdd-784627f75ae4" />
 <img width="1903" height="883" alt="Screenshot 2025-07-13 142039" src="https://github.com/user-attachments/assets/e1358f49-31a4-408c-951e-4b0a0e793cfc" />
 <img width="1911" height="897" alt="Screenshot 2025-07-13 142104" src="https://github.com/user-attachments/assets/9012c4b9-3ded-4b21-9531-13be60a8b02f" />
 <img width="1906" height="803" alt="Screenshot 2025-07-13 142159" src="https://github.com/user-attachments/assets/85e97e4b-ab41-4534-9415-4551fe31d8f8" />
+
+---
 
 ## Author
 
