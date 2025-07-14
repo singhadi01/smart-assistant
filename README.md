@@ -1,60 +1,69 @@
-# Smart Assistant for Document Summarization & QA
+# Smart Assistant for Document Summarization, QA & Quiz Evaluation
 
-An AI-powered assistant built with Django that reads PDF or TXT documents and enables:
-- Automatic Summarization (≤150 words)
-- Contextual Question Answering
-- Justified answers with document references
-- Interactive chat history
+An AI-powered assistant built with Django and Groq LLM that can:
+- Auto-summarize uploaded documents (≤150 words)
+- Answer questions based on document context
+- Provide one-line justified answers
+- Generate quizzes and evaluate your answers with scores
 
 ---
- 
-### Features
 
-- Upload structured documents (PDF or TXT)
-- Auto-summary using `sshleifer/distilbart-cnn-12-6`
-- Ask Anything mode for document-based QA
-- FAISS vector search over document chunks
+## Features
+
+- Upload PDF/TXT documents
+- Auto-summary using **Groq (DeepSeek R1 Distill LLaMA 70B)**
+- Ask Anything mode using context-aware retrieval
+- FAISS vector index on document chunks
 - Context retrieval with `MiniLM` sentence embeddings
-- QA using `distilbert-base-uncased-distilled-squad`
-- Chat history display
-- Clean UI with Bootstrap
-- Reset chat functionality
+- Quiz Mode: 3 questions generated from your uploaded document
+- Evaluation with:
+  - Score (0–100)
+  - Justification
+  - Correct Answer
+- Clean Bootstrap UI
+- Reset chat/quiz anytime
 
 ---
 
-##  Tech Stack
+## 🛠️ Tech Stack
 
-| Layer       | Tools Used                                  |
-|-------------|----------------------------------------------|
-| Backend     | Python, Django                              |
-| Frontend    | HTML, CSS, Bootstrap                        |
-| NLP Models  | `transformers`, `sentence-transformers`     |
-| Embeddings  | `all-MiniLM-L6-v2`                          |
-| Summarizer  | `sshleifer/distilbart-cnn-12-6`             |
-| QA Model    | `distilbert-base-uncased-distilled-squad`   |
-| Vector Search | FAISS                                     |
-| PDF Parsing | PyMuPDF (`fitz`)                            |
+| Layer         | Tools Used                                    |
+|---------------|------------------------------------------------|
+| Backend       | Python, Django                                 |
+| Frontend      | HTML, CSS, Bootstrap                           |
+| Embeddings    | `all-MiniLM-L6-v2` via HuggingFace             |
+| LLM (QA+Summary) | `deepseek-r1-distill-llama-70b` via **Groq API** |
+| Quiz + Evaluation | LangChain + Prompt Engineering             |
+| Vector Search | FAISS                                          |
+| Document Parsing | PyMuPDF                                     |
 
 ---
 
-## Project Structure
+##  Project Structure
+
+
 ```
 smart-assistant/
 ├── assistant/
 │ ├── templates/
 │ │ ├── upload.html
 │ │ ├── summary.html
-│ │ └── ask.html
+│ │ ├── ask.html
+│ │ └── quiz.html
 │ ├── utils/
 │ │ └── text_processing.py
 │ ├── views.py
 │ ├── models.py
 │ └── urls.py
+├── vectorstore/
+│ └── db_faiss/
 ├── media/
-│ └── (Uploaded files)
+│ └── (Uploaded PDFs)
+├── .env
+├── .gitignore
 ├── manage.py
 ├── requirements.txt
-├── .gitignore
+└── README.md 
 
 ```
 ---
@@ -79,16 +88,22 @@ source env/bin/activate  # For macOS/Linux
 ### 3. Install Dependencies
 ```pip install -r requirements.txt```
 
+### 4. Add your Groq API Key
+```Create a file named .env and add:
+GROQ_API_KEY=your_groq_api_key_here
+```
 ### 4. Run Django Server
 ```python manage.py runserver```
 
 ---
 
 ## Screenshots
-<img width="1904" height="791" alt="image" src="https://github.com/user-attachments/assets/cece0392-4c8a-490a-9cdd-784627f75ae4" />
-<img width="1903" height="883" alt="Screenshot 2025-07-13 142039" src="https://github.com/user-attachments/assets/e1358f49-31a4-408c-951e-4b0a0e793cfc" />
-<img width="1911" height="897" alt="Screenshot 2025-07-13 142104" src="https://github.com/user-attachments/assets/9012c4b9-3ded-4b21-9531-13be60a8b02f" />
-<img width="1906" height="803" alt="Screenshot 2025-07-13 142159" src="https://github.com/user-attachments/assets/85e97e4b-ab41-4534-9415-4551fe31d8f8" />
+<img width="1911" height="760" alt="image" src="https://github.com/user-attachments/assets/59eb6b1c-a26a-47e6-b0b3-1ffb54d0185a" />
+<img width="1911" height="956" alt="image" src="https://github.com/user-attachments/assets/afc24ec9-73de-4c71-8ff1-3615587497e4" />
+<img width="1902" height="773" alt="image" src="https://github.com/user-attachments/assets/25922fb6-4677-4900-9c66-5cf2f37a6a2c" />
+<img width="1907" height="950" alt="image" src="https://github.com/user-attachments/assets/2bf18f62-0ae9-469b-8d3f-d25d62ad3c5d" />
+<img width="1907" height="985" alt="image" src="https://github.com/user-attachments/assets/6dd8ccca-8ce7-4126-9f28-3028d6e219c4" />
+
 
 ---
 
