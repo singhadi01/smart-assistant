@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Assistant Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .question-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5 quiz-container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">📝 Quiz Based on Uploaded Document</h2>
+        </div>
+
+        {% if questions %}
+        <form method="POST" class="mb-5">
+            {% csrf_token %}
+            {% for q in questions %}
+                <div class="card mb-3">
+                    <div class="card-header bg-light">Q{{ forloop.counter }}</div>
+                    <div class="card-body">
+                        <p class="question-label">{{ q }}</p>
+                        <textarea name="answer{{ forloop.counter }}" class="form-control" rows="2" required placeholder="Your answer here..."></textarea>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success btn-lg">Submit Answers</button>
+            </div>
+        </form>
+        {% endif %}
+
+        {% if results %}
+        <div class="alert alert-info text-center">
+            <h4 class="mb-0">📊 Evaluation Results</h4>
+        </div>
+        {% for result in results %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Q{{ forloop.counter }}: {{ result.question }}</h5>
+                    <p><strong>Your Answer:</strong> {{ result.user_answer }}</p>
+                    <p><strong> Correct Answer:</strong> {{ result.correct_answer }}</p>
+                    <p><strong> Score:</strong> <span class="text-primary">{{ result.score }}%</span></p>
+                    <p><strong> Justification:</strong> {{ result.justification }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if error %}
+            <div class="alert alert-danger text-center mt-4">{{ error }}</div>
+        {% endif %}
+    </div>
+    {% include "footer.html" %}
+</body>
+</html>

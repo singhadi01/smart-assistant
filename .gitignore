@@ -1,25 +1,29 @@
-# === Python Cache Files ===
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-
-# === Virtual Environment ===
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.log
 env/
-
-# === Django-specific Files ===
+venv/
+ENV/
 *.sqlite3
 db.sqlite3
 /media/
+*.pyc
+*.pot
+*.mo
 *.log
-
-# === Environment Variables ===
-.env
-
-# === VSCode Settings (Optional) ===
+staticfiles/
+static_root/
 .vscode/
-
-# === System Files ===
+.idea/
+*.sublime-project
+*.sublime-workspace
 .DS_Store
 Thumbs.db
-
+.env
+vectorstore/db_faiss/
